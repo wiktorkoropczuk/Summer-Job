@@ -1,57 +1,53 @@
 package com.sample;
 
+import javax.swing.JOptionPane;
+
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
+import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.FactHandle;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 
-/**
- * This is a sample class to launch a rule.
- */
+
 public class DroolsTest {
-
     public static final void main(String[] args) {
         try {
-            // load up the knowledge base
+            
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
+        	KieBase kbase = kSession.getKieBase();
 
-            // go !
-            Message message = new Message();
-            message.setMessage("Hello World");
-            message.setStatus(Message.HELLO);
-            kSession.insert(message);
-            kSession.fireAllRules();
+            for (;;)
+            {
+            	kSession.fireAllRules();
+            	QueryResults results = kSession.getQueryResults("Questions without answers");
+            	for (QueryResultsRow result : results)
+            	{
+            		Object obj = result.get("question");
+            		FactType questionType = kbase.getFactType("com.sample", "Question");
+            		String question = (String)questionType.get(obj, "question");
+            	    int res = JOptionPane.showConfirmDialog(null, question);
+            	    switch (res) {
+            	    	case JOptionPane.YES_OPTION:
+            	    		questionType.set(obj, "answer", "Yes");
+            	    		break;
+            	        case JOptionPane.NO_OPTION:
+            	        	questionType.set(obj, "answer", "No");
+            	        	break;
+            	    }
+            	    FactHandle handle = kSession.getFactHandle(obj);
+            	    kSession.update(handle, obj);
+            	}
+            	
+            }
+            
         } catch (Throwable t) {
             t.printStackTrace();
         }
-    }
-
-    public static class Message {
-
-        public static final int HELLO = 0;
-        public static final int GOODBYE = 1;
-
-        private String message;
-
-        private int status;
-
-        public String getMessage() {
-            return this.message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public int getStatus() {
-            return this.status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
     }
 
 }

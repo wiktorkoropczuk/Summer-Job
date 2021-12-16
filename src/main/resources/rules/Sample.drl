@@ -1,20 +1,35 @@
 package com.sample
  
-import com.sample.DroolsTest.Message;
- 
-rule "Hello World"
-    when
-        m : Message( status == Message.HELLO, myMessage : message )
-    then
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
+declare Question
+	question : String
+	answer : String
 end
 
-rule "GoodBye"
+declare FinalAnswer
+	answer : String
+end
+
+query "Questions without answers"
+	question : Question(answer == null)
+end
+ 
+rule "Init"
     when
-        Message( status == Message.GOODBYE, myMessage : message )
+        
     then
-        System.out.println( myMessage );
+        insert(new Question("Do you need to make money?", null));
+end
+
+rule "YesPlaceHolder"
+	when
+		Question(question == "Do you need to make money?", answer == "Yes")
+	then
+		System.out.println("Answer is yes.");	
+end
+
+rule "NoPlaceHolder"
+	when
+		Question(question == "Do you need to make money?", answer == "No")
+	then
+		System.out.println("Answer is no.");	
 end
