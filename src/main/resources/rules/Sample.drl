@@ -12,6 +12,10 @@ end
 query "Questions without answers"
 	question : Question(answer == null)
 end
+
+query "Get answer"
+	answer : FinalAnswer()
+end
  
 rule "Init"
     when
@@ -20,16 +24,72 @@ rule "Init"
         insert(new Question("Do you need to make money?", null));
 end
 
-rule "YesPlaceHolder"
+rule "MoneyYes"
 	when
 		Question(question == "Do you need to make money?", answer == "Yes")
 	then
-		System.out.println("Answer is yes.");	
+		System.out.println("Not implemented yet."); //Placeholder
 end
 
-rule "NoPlaceHolder"
+rule "MoneyNo"
 	when
 		Question(question == "Do you need to make money?", answer == "No")
 	then
-		System.out.println("Answer is no.");	
+		insert(new Question("Do you have a bit of money to spend?", null));
+end
+
+rule "MoneySpendNo"
+	when
+		Question(question == "Do you have a bit of money to spend?", answer == "No")
+	then
+		insert(new Question("Do you have artistic talent?", null));
+end
+
+rule "MoneySpendYes"
+	when
+		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
+	then
+		insert(new Question("Do you want to stay in Hamilton?", null));
+end
+
+rule "ArtisticTalentNo"
+	when
+		Question(question == "Do you have artistic talent?", answer == "No")
+	then
+		insert(new FinalAnswer("INTERN/APPRENTICE"));
+end
+
+rule "ArtisticTalentYes"
+	when
+		Question(question == "Do you have artistic talent?", answer == "Yes")
+	then
+		insert(new FinalAnswer("PERFORMER/MUSICIAN"));
+end
+
+rule "HamiltonNo"
+	when
+		Question(question == "Do you want to stay in Hamilton?", answer == "No")
+	then
+		insert(new FinalAnswer("WORLD TRAVELLER"));
+end
+
+rule "HamiltonYes"
+	when
+		Question(question == "Do you want to stay in Hamilton?", answer == "Yes")
+	then
+		insert(new Question("Do you want to use your brain?", null));
+end
+
+rule "BrainNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "No")
+	then
+		insert(new FinalAnswer("COUCH POTATO"));
+end
+
+rule "BrainYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+	then
+		insert(new FinalAnswer("SUMMER STUDENT"));
 end
