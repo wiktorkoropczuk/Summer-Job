@@ -28,7 +28,7 @@ rule "MoneyYes"
 	when
 		Question(question == "Do you need to make money?", answer == "Yes")
 	then
-		System.out.println("Not implemented yet."); //Placeholder
+		insert(new Question("Do you want to use your brain?", null));
 end
 
 rule "MoneyNo"
@@ -80,16 +80,34 @@ rule "HamiltonYes"
 		insert(new Question("Do you want to use your brain?", null));
 end
 
-rule "BrainNo"
+rule "BrainNo_MoneyNo"
 	when
 		Question(question == "Do you want to use your brain?", answer == "No")
+		Question(question == "Do you need to make money?", answer == "No")
 	then
 		insert(new FinalAnswer("COUCH POTATO"));
 end
 
-rule "BrainYes"
+rule "BrainYes_MoneyNo"
 	when
 		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "No")
 	then
 		insert(new FinalAnswer("SUMMER STUDENT"));
+end
+
+rule "BrainNo_MoneyYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "No")
+		Question(question == "Do you need to make money?", answer == "Yes")
+	then
+		System.out.println("Not implemented yet.");
+end
+
+rule "BrainYes_MoneyYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+	then
+		System.out.println("Not implemented yet.");
 end
