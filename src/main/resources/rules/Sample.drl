@@ -345,7 +345,6 @@ end
 
 rule "WorkOutsideYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
 		Question(question == "Do you want to use your brain?", answer == "No")
 		Question(question == "Do you want to work outside?", answer == "Yes")
 	then
@@ -354,7 +353,6 @@ end
 
 rule "WorkOutsideNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
 		Question(question == "Do you want to use your brain?", answer == "No")
 		Question(question == "Do you want to work outside?", answer == "No")
 	then
@@ -363,9 +361,6 @@ end
 
 rule "PhysicalLabourYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
 		Question(question == "Are you okay with hard physical labour?", answer == "Yes")
 	then
 		insert(new Question("Are you okay with showering infrequently?", null));
@@ -373,9 +368,6 @@ end
 
 rule "PhysicalLabourNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
 		Question(question == "Are you okay with hard physical labour?", answer == "No")
 	then
 		insert(new Question("Do you like camping?", null));
@@ -383,10 +375,6 @@ end
 
 rule "CampingYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "No")
 		Question(question == "Do you like camping?", answer == "Yes")
 	then
 		insert(new FinalAnswer("PROVINCIAL PARK EMPLOYEE"));
@@ -394,10 +382,6 @@ end
 
 rule "CampingNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "No")
 		Question(question == "Do you like camping?", answer == "No")
 	then
 		insert(new FinalAnswer("FRUIT PICKER"));
@@ -405,10 +389,6 @@ end
 
 rule "ShoweringInfrequentlyYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "Yes")
 		Question(question == "Are you okay with showering infrequently?", answer == "Yes")
 	then
 		insert(new FinalAnswer("TREE PLANTER"));
@@ -416,10 +396,6 @@ end
 
 rule "ShoweringInfrequentlyNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "Yes")
 		Question(question == "Are you okay with showering infrequently?", answer == "No")
 	then
 		insert(new Question("Do you like animals?", null));
@@ -427,11 +403,6 @@ end
 
 rule "AnimalsYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "Yes")
-		Question(question == "Are you okay with showering infrequently?", answer == "No")
 		Question(question == "Do you like animals?", answer == "Yes")
 	then
 		insert(new FinalAnswer("FARM LABOURER"));
@@ -439,11 +410,6 @@ end
 
 rule "AnimalsNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "Yes")
-		Question(question == "Are you okay with hard physical labour?", answer == "Yes")
-		Question(question == "Are you okay with showering infrequently?", answer == "No")
 		Question(question == "Do you like animals?", answer == "No")
 	then
 		insert(new FinalAnswer("LANDSCAPER"));
@@ -451,9 +417,6 @@ end
 
 rule "FoodOrDrinkYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
 		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
 	then
 		insert(new Question("Do you have good people skills?", null));
@@ -461,9 +424,6 @@ end
 
 rule "FoodOrDrinkNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
 		Question(question == "Do you want to wirk with food/drink?", answer == "No")
 	then
 		insert(new Question("Are you good at telling people what to do?", null));
@@ -471,10 +431,6 @@ end
 
 rule "LeaderYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
 		Question(question == "Are you good at telling people what to do?", answer == "Yes")
 	then
 		insert(new Question("Are you bulky?", null));
@@ -482,10 +438,6 @@ end
 
 rule "LeaderNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
 		Question(question == "Are you good at telling people what to do?", answer == "No")
 	then
 		insert(new Question("Are you fine with travelling?", null));
@@ -493,11 +445,6 @@ end
 
 rule "TravellingYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "No")
 		Question(question == "Are you fine with travelling?", answer == "Yes")
 	then
 		insert(new FinalAnswer("BRAND PROMOTER"));
@@ -505,11 +452,6 @@ end
 
 rule "TravellingNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "No")
 		Question(question == "Are you fine with travelling?", answer == "No")
 	then
 		insert(new Question("Are you afraid of needles?", null));
@@ -517,12 +459,6 @@ end
 
 rule "AfraidNeedlesYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "No")
-		Question(question == "Are you fine with travelling?", answer == "No")
 		Question(question == "Are you afraid of needles?", answer == "Yes")
 	then
 		insert(new FinalAnswer("SALES CLERK"));
@@ -530,12 +466,6 @@ end
 
 rule "AfraidNeedlesNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "No")
-		Question(question == "Are you fine with travelling?", answer == "No")
 		Question(question == "Are you afraid of needles?", answer == "No")
 	then
 		insert(new FinalAnswer("MEDICAL TEST SUBJECT"));
@@ -543,11 +473,6 @@ end
 
 rule "BulkyYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "Yes")
 		Question(question == "Are you bulky?", answer == "Yes")
 	then
 		insert(new FinalAnswer("SECURITY GUARD/BOUNCER"));
@@ -555,11 +480,6 @@ end
 
 rule "BulkyNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "Yes")
 		Question(question == "Are you bulky?", answer == "No")
 	then
 		insert(new Question("Are you a good swimmer?", null));
@@ -567,12 +487,6 @@ end
 
 rule "SwimmerYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "Yes")
-		Question(question == "Are you bulky?", answer == "No")
 		Question(question == "Are you a good swimmer?", answer == "Yes")
 	then
 		insert(new FinalAnswer("LIFEGUARD"));
@@ -580,12 +494,6 @@ end
 
 rule "SwimmerNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "No")
-		Question(question == "Are you good at telling people what to do?", answer == "Yes")
-		Question(question == "Are you bulky?", answer == "No")
 		Question(question == "Are you a good swimmer?", answer == "No")
 	then
 		insert(new FinalAnswer("SPORT REFEREE"));
@@ -593,10 +501,6 @@ end
 
 rule "PeopoleSkillsYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
 		Question(question == "Do you have good people skills?", answer == "Yes")
 	then
 		insert(new Question("Do you know the difference between a Manhattan and an old - fashioned?", null));
@@ -604,10 +508,6 @@ end
 
 rule "PeopleSkillsNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
 		Question(question == "Do you have good people skills?", answer == "No")
 	then
 		insert(new Question("Do you mind getting a bit greasy?", null));
@@ -615,11 +515,6 @@ end
 
 rule "MindGettingGreasyYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "No")
 		Question(question == "Do you mind getting a bit greasy?", answer == "Yes")
 	then
 		insert(new FinalAnswer("GROCERY STORE EMPLOYEE"));
@@ -627,11 +522,6 @@ end
 
 rule "MindGettingGreasyNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "No")
 		Question(question == "Do you mind getting a bit greasy?", answer == "No")
 	then
 		insert(new Question("Do you like burgers?", null));
@@ -639,12 +529,6 @@ end
 
 rule "BurgersYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "No")
-		Question(question == "Do you mind getting a bit greasy?", answer == "No")
 		Question(question == "Do you like burgers?", answer == "Yes")
 	then
 		insert(new FinalAnswer("FAST FOOD RESTAURANT EMPLOYEE"));
@@ -652,12 +536,6 @@ end
 
 rule "BurgersNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "No")
-		Question(question == "Do you mind getting a bit greasy?", answer == "No")
 		Question(question == "Do you like burgers?", answer == "No")
 	then
 		insert(new FinalAnswer("PREP COOK/DISHWASHER"));
@@ -665,11 +543,6 @@ end
 
 rule "Manhattan_oldFashionedDifferenceYes"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "Yes")
 		Question(question == "Do you know the difference between a Manhattan and an old - fashioned?", answer == "Yes")
 	then
 		insert(new FinalAnswer("BARTENDER"));
@@ -677,11 +550,6 @@ end
 
 rule "Manhattan_oldFashionedDifferenceNo"
 	when
-		Question(question == "Do you need to make money?", answer == "Yes")
-		Question(question == "Do you want to use your brain?", answer == "No")
-		Question(question == "Do you want to work outside?", answer == "No")
-		Question(question == "Do you want to wirk with food/drink?", answer == "Yes")
-		Question(question == "Do you have good people skills?", answer == "Yes")
 		Question(question == "Do you know the difference between a Manhattan and an old - fashioned?", answer == "No")
 	then
 		insert(new FinalAnswer("BARRISTA"));
