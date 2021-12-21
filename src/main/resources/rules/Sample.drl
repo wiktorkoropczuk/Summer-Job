@@ -40,6 +40,7 @@ end
 
 rule "MoneySpendNo"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
 		Question(question == "Do you have a bit of money to spend?", answer == "No")
 	then
 		insert(new Question("Do you have artistic talent?", null));
@@ -47,6 +48,7 @@ end
 
 rule "MoneySpendYes"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
 		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
 	then
 		insert(new Question("Do you want to stay in Hamilton?", null));
@@ -54,6 +56,8 @@ end
 
 rule "ArtisticTalentNo"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "No")
 		Question(question == "Do you have artistic talent?", answer == "No")
 	then
 		insert(new FinalAnswer("INTERN/APPRENTICE"));
@@ -61,6 +65,8 @@ end
 
 rule "ArtisticTalentYes"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "No")
 		Question(question == "Do you have artistic talent?", answer == "Yes")
 	then
 		insert(new FinalAnswer("PERFORMER/MUSICIAN"));
@@ -68,6 +74,8 @@ end
 
 rule "HamiltonNo"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
 		Question(question == "Do you want to stay in Hamilton?", answer == "No")
 	then
 		insert(new FinalAnswer("WORLD TRAVELLER"));
@@ -75,6 +83,8 @@ end
 
 rule "HamiltonYes"
 	when
+		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
 		Question(question == "Do you want to stay in Hamilton?", answer == "Yes")
 	then
 		insert(new Question("Do you want to use your brain?", null));
@@ -82,16 +92,20 @@ end
 
 rule "BrainNo_MoneyNo"
 	when
-		Question(question == "Do you want to use your brain?", answer == "No")
 		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
+		Question(question == "Do you want to stay in Hamilton?", answer == "Yes")
+		Question(question == "Do you want to use your brain?", answer == "No")
 	then
 		insert(new FinalAnswer("COUCH POTATO"));
 end
 
 rule "BrainYes_MoneyNo"
 	when
-		Question(question == "Do you want to use your brain?", answer == "Yes")
 		Question(question == "Do you need to make money?", answer == "No")
+		Question(question == "Do you have a bit of money to spend?", answer == "Yes")
+		Question(question == "Do you want to stay in Hamilton?", answer == "Yes")
+		Question(question == "Do you want to use your brain?", answer == "Yes")
 	then
 		insert(new FinalAnswer("SUMMER STUDENT"));
 end
@@ -109,5 +123,223 @@ rule "BrainYes_MoneyYes"
 		Question(question == "Do you want to use your brain?", answer == "Yes")
 		Question(question == "Do you need to make money?", answer == "Yes")
 	then
-		System.out.println("Not implemented yet.");
+		insert(new Question("Do you want to work in an office/lab?", null));
+end
+
+rule "OfficeNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+	then
+		insert(new Question("Do you want to be your own boss?", null));
+end
+
+rule "OfficeYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+	then
+		insert(new Question("Do you want to work at McMaster?", null));
+end
+
+rule "BossNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "No")
+	then
+		insert(new Question("Do you want to work outside?", null));
+end
+
+rule "BossYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+	then
+		insert(new Question("Are you good at academics?", null));
+end
+
+rule "OutsideNo_BrainYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "No")
+		Question(question == "Do you want to work outside?", answer == "No")
+	then
+		insert(new FinalAnswer("MUSEUM INTERPRETER"));
+end
+
+rule "OutsideYes_BrainYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "No")
+		Question(question == "Do you want to work outside?", answer == "Yes")
+	then
+		insert(new FinalAnswer("SUMMER CAMP LEADER"));
+end
+
+rule "AcademicsNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "No")
+	then
+		insert(new Question("Are you artistic?", null));
+end
+
+rule "AcademicsYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "Yes")
+	then
+		insert(new Question("Are you good at teaching?", null));
+end
+
+rule "ArtisticNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "No")
+		Question(question == "Are you artistic?", answer == "No")
+	then
+		insert(new FinalAnswer("SMALL-BUSINESS OWNER"));
+end
+
+rule "ArtisticYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "No")
+		Question(question == "Are you artistic?", answer == "Yes")
+	then
+		insert(new FinalAnswer("PERFORMER/BUSKER"));
+end
+
+rule "TeachingNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "Yes")
+		Question(question == "Are you good at teaching?", answer == "No")
+	then
+		insert(new FinalAnswer("USRA RECIPENT"));
+end
+
+rule "TeachingYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "No")
+		Question(question == "Do you want to be your own boss?", answer == "Yes")
+		Question(question == "Are you good at academics?", answer == "Yes")
+		Question(question == "Are you good at teaching?", answer == "Yes")
+	then
+		insert(new FinalAnswer("TUTOR"));
+end
+
+rule "McMasterNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "No")
+	then
+		insert(new Question("Are you decent with computers?", null));
+end
+
+rule "McMasterYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "Yes")
+	then
+		insert(new Question("Are you good at science?", null));
+end
+
+rule "ScienceNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "Yes")
+		Question(question == "Are you good at science?", answer == "No")
+	then
+		insert(new FinalAnswer("MCMASTER OFFICE ASSISTANT"));
+end
+
+rule "ScienceYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "Yes")
+		Question(question == "Are you good at science?", answer == "Yes")
+	then
+		insert(new FinalAnswer("RESEARCH ASSISTANT"));
+end
+
+rule "ComputersNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "No")
+		Question(question == "Are you decent with computers?", answer == "No")
+	then
+		insert(new FinalAnswer("CIVIL SERVANT"));
+end
+
+rule "ComputersYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "No")
+		Question(question == "Are you decent with computers?", answer == "Yes")
+	then
+		insert(new Question("Are you good at coding?", null));
+end
+
+rule "CodingNo"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "No")
+		Question(question == "Are you decent with computers?", answer == "Yes")
+		Question(question == "Are you good at coding?", answer == "No")
+	then
+		insert(new FinalAnswer("ADMIN ASSISTANT/SECRETARY"));
+end
+
+rule "CodingYes"
+	when
+		Question(question == "Do you want to use your brain?", answer == "Yes")
+		Question(question == "Do you need to make money?", answer == "Yes")
+		Question(question == "Do you want to work in an office/lab?", answer == "Yes")
+		Question(question == "Do you want to work at McMaster?", answer == "No")
+		Question(question == "Are you decent with computers?", answer == "Yes")
+		Question(question == "Are you good at coding?", answer == "Yes")
+	then
+		insert(new FinalAnswer("SOFTWARE DEVELOPER"));
 end
